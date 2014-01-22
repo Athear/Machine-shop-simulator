@@ -15,18 +15,7 @@ public class MachineShopSimulator {
     public static final String EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK = "each job must have >= 1 task";
     public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
-    // top-level nested classes
-    public static class Task {
-        // data members
-        public int machine;
-        public int time;
-
-        // constructor
-        public Task(int theMachine, int theTime) {
-            machine = theMachine;
-            time = theTime;
-        }
-    }
+  
 
     
 

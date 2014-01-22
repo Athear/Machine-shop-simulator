@@ -1,6 +1,6 @@
 package applications;
 
-import applications.MachineShopSimulator.Task;
+import applications.Task;
 import dataStructures.LinkedQueue;
 
 public class Job {
