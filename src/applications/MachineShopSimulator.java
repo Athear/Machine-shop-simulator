@@ -17,37 +17,15 @@ public class MachineShopSimulator {
 
 
     // data members of MachineShopSimulator
-    private static int timeNow; // current time
-    private static int numMachines; // number of machines
-    private static int numJobs; // number of jobs
-    private static EventList eList; // pointer to event list
-    private static Machine[] machine; // array of machines
-    private static int largeTime; // all machines finish before this
+    static int timeNow; // current time
+    static int numMachines; // number of machines
+    static int numJobs; // number of jobs
+    static EventList eList; // pointer to event list
+    static Machine[] machine; // array of machines
+    static int largeTime; // all machines finish before this
 
     // methods
-    /**
-     * move theJob to machine for its next task
-     * 
-     * @return false iff no next task
-     */
-    static boolean moveToNextMachine(Job theJob) {
-        if (theJob.taskQ.isEmpty()) {// no next task
-            System.out.println("Job " + theJob.id + " has completed at "
-                    + timeNow + " Total wait was " + (timeNow - theJob.length));
-            return false;
-        } else {// theJob has a next task
-                // get machine for next task
-            int p = ((Task) theJob.taskQ.getFrontElement()).machine;
-            // put on machine p's wait queue
-            machine[p].jobQ.put(theJob);
-            theJob.arrivalTime = timeNow;
-            // if p idle, schedule immediately
-            if (eList.nextEventTime(p) == largeTime) {// machine is idle
-                changeState(p);
-            }
-            return true;
-        }
-    }
+
 
     /**
      * change the state of theMachine
@@ -151,7 +129,7 @@ public class MachineShopSimulator {
             Job theJob = changeState(nextToFinish);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !moveToNextMachine(theJob))
+            if (theJob != null && !theJob.moveToNextMachine(timeNow, machine))
                 numJobs--;
         }
     }

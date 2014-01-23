@@ -1,5 +1,7 @@
 package applications;
 
+
+//TODO: split functionality from this class between Machine and Task classes.
 public class EventList {
     // data members
     int[] finishTime; // finish time array
@@ -20,6 +22,7 @@ public class EventList {
             finishTime[i] = theLargeTime;
     }
 
+    //TODO:move this method into the simluator proper. 
     /** @return machine for next event */
     public int nextEventMachine() {
         // find first machine to finish, this is the
@@ -37,7 +40,8 @@ public class EventList {
     public int nextEventTime(int theMachine) {
         return finishTime[theMachine];
     }
-
+    
+    //TODO: change this so it takes a machine. Get rid of this stupid array.
     public void setFinishTime(int theMachine, int theTime) {
         finishTime[theMachine] = theTime;
     }
