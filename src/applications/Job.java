@@ -38,7 +38,7 @@ public class Job {
 	 * 
 	 * @return false iff no next task
 	 */
-	static boolean moveToNextMachine(Job theJob) {
+	boolean moveToNextMachine(Job theJob) {
 	    if (theJob.taskQ.isEmpty()) {// no next task
 	        System.out.println("Job " + theJob.id + " has completed at "
 	                + MachineShopSimulator.getTimeNow() + " Total wait was " + (MachineShopSimulator.getTimeNow() - theJob.length));

@@ -127,7 +127,7 @@ public class MachineShopSimulator {
             Job theJob = changeState(nextToFinish);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !Job.moveToNextMachine(theJob))
+            if (theJob != null && !theJob.moveToNextMachine(theJob))
                 numJobs--;
         }
     }
