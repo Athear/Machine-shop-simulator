@@ -54,30 +54,31 @@ public class MachineShopSimulator {
      * 
      * @return last job run on this machine
      */
-    static Job changeState(int theMachine) {// Task on theMachine has finished,
+    static Job changeState(int machineAddress) {// Task on theMachine has finished,
                                             // schedule next one.
         Job lastJob;
-        if (machine[theMachine].activeJob == null) {// in idle or change-over
+        Machine theMachine = machine[machineAddress];
+		if (theMachine.activeJob == null) {// in idle or change-over
                                                     // state
             lastJob = null;
             // wait over, ready for new job
-            if (machine[theMachine].jobQ.isEmpty()) // no waiting job
-                eList.setFinishTime(theMachine, largeTime);
+            if (theMachine.jobQ.isEmpty()) // no waiting job
+                eList.setFinishTime(machineAddress, largeTime);
             else {// take job off the queue and work on it
-                machine[theMachine].activeJob = (Job) machine[theMachine].jobQ
+                theMachine.activeJob = (Job) theMachine.jobQ
                         .remove();
-                machine[theMachine].totalWait += timeNow
-                        - machine[theMachine].activeJob.arrivalTime;
-                machine[theMachine].numTasks++;
-                int t = machine[theMachine].activeJob.removeNextTask();
-                eList.setFinishTime(theMachine, timeNow + t);
+                theMachine.totalWait += timeNow
+                        - theMachine.activeJob.arrivalTime;
+                theMachine.numTasks++;
+                int t = theMachine.activeJob.removeNextTask();
+                eList.setFinishTime(machineAddress, timeNow + t);
             }
         } else {// task has just finished on machine[theMachine]
                 // schedule change-over time
-            lastJob = machine[theMachine].activeJob;
-            machine[theMachine].activeJob = null;
-            eList.setFinishTime(theMachine, timeNow
-                    + machine[theMachine].changeTime);
+            lastJob = theMachine.activeJob;
+            theMachine.activeJob = null;
+            eList.setFinishTime(machineAddress, timeNow
+                    + theMachine.changeTime);
         }
 
         return lastJob;
