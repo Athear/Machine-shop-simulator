@@ -185,27 +185,27 @@ public class MachineShopSimulator {
         outputStatistics(); // output machine wait times
     }
 
-	private static int getTimeNow() {
+	static int getTimeNow() {
 		return timeNow;
 	}
 
-	private static void setTimeNow(int timeNow) {
+	static void setTimeNow(int timeNow) {
 		MachineShopSimulator.timeNow = timeNow;
 	}
 
-	private static int getLargeTime() {
+	static int getLargeTime() {
 		return largeTime;
 	}
 
-	private static void setLargeTime(int largeTime) {
+	static void setLargeTime(int largeTime) {
 		MachineShopSimulator.largeTime = largeTime;
 	}
 
-	private static EventList geteList() {
+	static EventList geteList() {
 		return eList;
 	}
 
-	private static void seteList(EventList eList) {
+	static void seteList(EventList eList) {
 		MachineShopSimulator.eList = eList;
 	}
 }
