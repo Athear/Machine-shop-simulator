@@ -184,4 +184,20 @@ public class MachineShopSimulator {
         simulate(); // run all jobs through shop
         outputStatistics(); // output machine wait times
     }
+
+	private static int getTimeNow() {
+		return timeNow;
+	}
+
+	private static void setTimeNow(int timeNow) {
+		MachineShopSimulator.timeNow = timeNow;
+	}
+
+	private static int getLargeTime() {
+		return largeTime;
+	}
+
+	private static void setLargeTime(int largeTime) {
+		MachineShopSimulator.largeTime = largeTime;
+	}
 }
