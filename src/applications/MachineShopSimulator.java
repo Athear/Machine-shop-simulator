@@ -24,31 +24,6 @@ public class MachineShopSimulator {
     private static Machine[] machine; // array of machines
     private static int largeTime; // all machines finish before this
 
-    // methods
-    /**
-     * move theJob to machine for its next task
-     * 
-     * @return false iff no next task
-     */
-    static boolean moveToNextMachine(Job theJob) {
-        if (theJob.taskQ.isEmpty()) {// no next task
-            System.out.println("Job " + theJob.id + " has completed at "
-                    + getTimeNow() + " Total wait was " + (getTimeNow() - theJob.length));
-            return false;
-        } else {// theJob has a next task
-                // get machine for next task
-            int p = ((Task) theJob.taskQ.getFrontElement()).machine;
-            // put on machine p's wait queue
-            machine[p].jobQ.put(theJob);
-            theJob.arrivalTime = getTimeNow();
-            // if p idle, schedule immediately
-            if (geteList().nextEventTime(p) == getLargeTime()) {// machine is idle
-                changeState(p);
-            }
-            return true;
-        }
-    }
-
     /**
      * change the state of theMachine
      * 
@@ -152,7 +127,7 @@ public class MachineShopSimulator {
             Job theJob = changeState(nextToFinish);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !moveToNextMachine(theJob))
+            if (theJob != null && !Job.moveToNextMachine(theJob))
                 numJobs--;
         }
     }
@@ -209,11 +184,11 @@ public class MachineShopSimulator {
 		MachineShopSimulator.eList = eList;
 	}
 
-	private static Machine[] getMachine() {
+	static Machine[] getMachine() {
 		return machine;
 	}
 
-	private static void setMachine(Machine[] machine) {
+	static void setMachine(Machine[] machine) {
 		MachineShopSimulator.machine = machine;
 	}
 }
