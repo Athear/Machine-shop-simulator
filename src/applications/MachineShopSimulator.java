@@ -39,7 +39,7 @@ public class MachineShopSimulator {
                 // get machine for next task
             int p = ((Task) theJob.taskQ.getFrontElement()).machine;
             // put on machine p's wait queue
-            getMachine()[p].jobQ.put(theJob);
+            machine[p].jobQ.put(theJob);
             theJob.arrivalTime = getTimeNow();
             // if p idle, schedule immediately
             if (geteList().nextEventTime(p) == getLargeTime()) {// machine is idle
@@ -57,7 +57,7 @@ public class MachineShopSimulator {
     static Job changeState(int machineAddress) {// Task on theMachine has finished,
                                             // schedule next one.
         Job lastJob;
-        Machine theMachine = getMachine()[machineAddress];
+        Machine theMachine = machine[machineAddress];
 		if (theMachine.activeJob == null) {// in idle or change-over
                                                     // state
             lastJob = null;
@@ -97,9 +97,9 @@ public class MachineShopSimulator {
 
         // create event and machine queues
         eList = new EventList(numMachines, largeTime);
-        setMachine(new Machine[numMachines + 1]);
+        machine = new Machine[numMachines + 1];
         for (int i = 1; i <= numMachines; i++)
-            getMachine()[i] = new Machine();
+            machine[i] = new Machine();
 
         // input the change-over times
         System.out.println("Enter change-over times for machines");
@@ -107,7 +107,7 @@ public class MachineShopSimulator {
             int ct = keyboard.readInteger();
             if (ct < 0)
                 throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
-            getMachine()[j].changeTime = ct;
+            machine[j].changeTime = ct;
         }
 
         // input the jobs
@@ -133,7 +133,7 @@ public class MachineShopSimulator {
                     firstMachine = theMachine; // job's first machine
                 theJob.addTask(theMachine, theTaskTime); // add to
             } // task queue
-            getMachine()[firstMachine].jobQ.put(theJob);
+            machine[firstMachine].jobQ.put(theJob);
         }
     }
 
@@ -162,9 +162,9 @@ public class MachineShopSimulator {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
             System.out.println("Machine " + p + " completed "
-                    + getMachine()[p].numTasks + " tasks");
+                    + machine[p].numTasks + " tasks");
             System.out.println("The total wait time was "
-                    + getMachine()[p].totalWait);
+                    + machine[p].totalWait);
             System.out.println();
         }
     }
@@ -209,11 +209,11 @@ public class MachineShopSimulator {
 		MachineShopSimulator.eList = eList;
 	}
 
-	static Machine[] getMachine() {
+	private static Machine[] getMachine() {
 		return machine;
 	}
 
-	static void setMachine(Machine[] machine) {
+	private static void setMachine(Machine[] machine) {
 		MachineShopSimulator.machine = machine;
 	}
 }
