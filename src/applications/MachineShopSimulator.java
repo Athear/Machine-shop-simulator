@@ -200,4 +200,12 @@ public class MachineShopSimulator {
 	private static void setLargeTime(int largeTime) {
 		MachineShopSimulator.largeTime = largeTime;
 	}
+
+	private static EventList geteList() {
+		return eList;
+	}
+
+	private static void seteList(EventList eList) {
+		MachineShopSimulator.eList = eList;
+	}
 }
