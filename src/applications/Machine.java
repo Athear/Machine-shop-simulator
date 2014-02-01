@@ -31,7 +31,6 @@ public class Machine {
                                                     // finished,
             // schedule next one.
             Job lastJob;
-            //Machine theMachine = MachineShopSimulator.getMachine()[machineAddress];
             if (this.activeJob == null) {// in idle or change-over
                                                // state
                 lastJob = null;
