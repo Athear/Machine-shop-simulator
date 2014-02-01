@@ -51,8 +51,7 @@ public class Job {
         MachineShopSimulator.getMachine()[p].jobQ.put(this);
         arrivalTime = MachineShopSimulator.getTimeNow();
         // if p idle, schedule immediately
-        if (MachineShopSimulator.geteList().nextEventTime(p) == MachineShopSimulator
-                .getLargeTime()) {// machine is idle
+        if (MachineShopSimulator.geteList().nextEventTime(p) == MachineShopSimulator.getLargeTime()) {// machine is idle
             MachineShopSimulator.getTheMachine(p).changeState(p);
         }
         return true;

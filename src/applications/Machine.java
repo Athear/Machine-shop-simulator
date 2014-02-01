@@ -39,8 +39,7 @@ public class Machine {
                     MachineShopSimulator.geteList().setFinishTime(address, MachineShopSimulator.getLargeTime());
                 }else {// take job off the queue and work on it
                     this.activeJob = (Job) this.jobQ.remove();
-                    this.totalWait += MachineShopSimulator.getTimeNow()
-                            - this.activeJob.arrivalTime;
+                    this.totalWait += MachineShopSimulator.getTimeNow() - this.activeJob.arrivalTime;
                     this.numTasks++;
                     int t = this.activeJob.removeNextTask();
                     MachineShopSimulator.geteList().setFinishTime(address, MachineShopSimulator.getTimeNow() + t);

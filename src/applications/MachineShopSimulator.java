@@ -3,7 +3,6 @@
 package applications;
 
 import utilities.MyInputStream;
-import dataStructures.LinkedQueue;
 import exceptions.MyInputException;
 import applications.Machine;
 
@@ -66,8 +65,7 @@ public class MachineShopSimulator {
             for (int j = 1; j <= tasks; j++) {// get tasks for job i
                 int theMachine = keyboard.readInteger();
                 int theTaskTime = keyboard.readInteger();
-                if (theMachine < 1 || theMachine > getNumMachines()
-                        || theTaskTime < 1)
+                if (theMachine < 1 || theMachine > getNumMachines() || theTaskTime < 1)
                     throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
                 if (j == 1)
                     firstMachine = theMachine; // job's first machine
