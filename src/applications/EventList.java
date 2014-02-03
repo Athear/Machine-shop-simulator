@@ -16,14 +16,15 @@ public class EventList {
 
         // all machines are idle, initialize with
         // large finish time
-        for (int i = 1; i <= theNumMachines; i++)
+        for (int i = 1; i <= theNumMachines; i++){
             finishTime[i] = theLargeTime;
+        }
     }
 
 
-
-    public int nextEventTime(int theMachine) {
-        return finishTime[theMachine];
+    
+    public int nextEventTime(Machine theMachine) {
+        return theMachine.finishTime;
     }
 
     public void setFinishTime(Machine theMachine, int theTime) {

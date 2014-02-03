@@ -47,12 +47,15 @@ public class Job {
         }// theJob has a next task
          // get machine for next task
         int p = ((Task) taskQ.getFrontElement()).machine;
+        Machine nextMachine=MachineShopSimulator.getTheMachine(p);
         // put on machine p's wait queue
-        MachineShopSimulator.getTheMachine(p).jobQ.put(this);
+        nextMachine.jobQ.put(this);
         arrivalTime = MachineShopSimulator.getTimeNow();
         // if p idle, schedule immediately
-        if (MachineShopSimulator.geteList().nextEventTime(p) == MachineShopSimulator.getLargeTime()) {// machine is idle
-            MachineShopSimulator.getTheMachine(p).changeState(p);
+        
+        //TODO possibly move this to machineShopSimulator or clean it up somehow.
+        if (MachineShopSimulator.geteList().nextEventTime(nextMachine) == MachineShopSimulator.getLargeTime()) {// machine is idle
+            nextMachine.changeState(p);
         }
         return true;
         
