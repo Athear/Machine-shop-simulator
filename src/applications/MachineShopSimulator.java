@@ -106,7 +106,7 @@ public class MachineShopSimulator {
     static void simulate() {
         while (numJobs > 0) {// at least one job left
             Machine nextToFinish = machine[nextEventMachine()];
-            timeNow = eList.nextEventTime(nextToFinish);
+            timeNow = nextToFinish.nextEventTime();
             // change job on machine nextToFinish
             Job theJob = nextToFinish.changeState();
             // move theJob to its next machine

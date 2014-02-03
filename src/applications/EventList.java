@@ -23,10 +23,6 @@ public class EventList {
 
 
     
-    public int nextEventTime(Machine theMachine) {
-        return theMachine.finishTime;
-    }
-
     public void setFinishTime(Machine theMachine, int theTime) {
         finishTime[theMachine.machineIndex] = theTime;
         theMachine.finishTime = theTime;

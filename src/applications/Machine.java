@@ -29,7 +29,6 @@ public class Machine {
     //    }
         
 	
-	//TODO get rid of address
         public Job changeState() {// Task on theMachine has
                                                     // finished,
             // schedule next one.
@@ -56,4 +55,8 @@ public class Machine {
     
             return lastJob;
         }
+
+    public int nextEventTime() {
+        return finishTime;
+    }
 }

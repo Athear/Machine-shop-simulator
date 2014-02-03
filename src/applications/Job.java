@@ -54,7 +54,7 @@ public class Job {
         // if p idle, schedule immediately
         
         //TODO possibly move this to machineShopSimulator or clean it up somehow.
-        if (MachineShopSimulator.geteList().nextEventTime(nextMachine) == MachineShopSimulator.getLargeTime()) {// machine is idle
+        if (nextMachine.nextEventTime() == MachineShopSimulator.getLargeTime()) {// machine is idle
             nextMachine.changeState();
         }
         return true;
