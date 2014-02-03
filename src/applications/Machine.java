@@ -9,9 +9,12 @@ public class Machine {
 	public int totalWait;
 	public int numTasks;
 	public Job activeJob;
+	int finishTime;
+	int machineIndex;
 
-	public Machine() {
+	public Machine(int index) {
 		jobQ = new LinkedQueue();
+		machineIndex=index;
 	}
 
     /**
@@ -36,19 +39,19 @@ public class Machine {
                 lastJob = null;
                 // wait over, ready for new job
                 if (this.jobQ.isEmpty()){ // no waiting job
-                    MachineShopSimulator.geteList().setFinishTime(address, MachineShopSimulator.getLargeTime());
+                    MachineShopSimulator.geteList().setFinishTime(this, MachineShopSimulator.getLargeTime());
                 }else {// take job off the queue and work on it
                     this.activeJob = (Job) this.jobQ.remove();
                     this.totalWait += MachineShopSimulator.getTimeNow() - this.activeJob.arrivalTime;
                     this.numTasks++;
                     int t = this.activeJob.removeNextTask();
-                    MachineShopSimulator.geteList().setFinishTime(address, MachineShopSimulator.getTimeNow() + t);
+                    MachineShopSimulator.geteList().setFinishTime(this, MachineShopSimulator.getTimeNow() + t);
                 }
             } else {// task has just finished on machine[theMachine]
                     // schedule change-over time
                 lastJob = this.activeJob;
                 this.activeJob = null;
-                MachineShopSimulator.geteList().setFinishTime(address, MachineShopSimulator.getTimeNow() + this.changeTime);
+                MachineShopSimulator.geteList().setFinishTime(this, MachineShopSimulator.getTimeNow() + this.changeTime);
             }
     
             return lastJob;

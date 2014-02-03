@@ -38,7 +38,7 @@ public class MachineShopSimulator {
         eList = new EventList(getNumMachines(), largeTime);
         machine = new Machine[getNumMachines() + 1];
         for (int i = 1; i <= getNumMachines(); i++)
-            machine[i] = new Machine();
+            machine[i] = new Machine(i);
 
         // input the change-over times
         System.out.println("Enter change-over times for machines");
