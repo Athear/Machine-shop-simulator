@@ -19,7 +19,6 @@ public class MachineShopSimulator {
     static int timeNow; // current time
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
-    static EventList eList; // pointer to event list
     static Machine[] machine; // array of machines
     static int largeTime; // all machines finish before this
 
@@ -56,10 +55,9 @@ public class MachineShopSimulator {
             throw new MyInputException(NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1);
 
         // create event and machine queues
-        eList = new EventList(getNumMachines(), largeTime);
         machine = new Machine[getNumMachines() + 1];
         for (int i = 1; i <= getNumMachines(); i++)
-            machine[i] = new Machine(i);
+            machine[i] = new Machine(i,largeTime);
 
         // input the change-over times
         System.out.println("Enter change-over times for machines");
@@ -130,6 +128,7 @@ public class MachineShopSimulator {
 
     /** entry point for machine shop simulator */
     public static void main(String[] args) {
+        //TODO make this a constant
         largeTime = Integer.MAX_VALUE;
         /*
          * It's vital that we (re)set this to 0 because if the simulator is called
@@ -160,13 +159,6 @@ public class MachineShopSimulator {
 		MachineShopSimulator.largeTime = largeTime;
 	}
 
-	static EventList geteList() {
-		return eList;
-	}
-
-	static void seteList(EventList eList) {
-		MachineShopSimulator.eList = eList;
-	}
 
 	static Machine getTheMachine(int arrAddress){
 	    return machine[arrAddress];

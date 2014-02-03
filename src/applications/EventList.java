@@ -1,7 +1,7 @@
 package applications;
 
 public class EventList {
-    // data members
+//     data members
     int[] finishTime; // finish time array
 
     // constructor
