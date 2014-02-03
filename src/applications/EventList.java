@@ -21,10 +21,4 @@ public class EventList {
         }
     }
 
-
-    
-    public void setFinishTime(Machine theMachine, int theTime) {
-        finishTime[theMachine.machineIndex] = theTime;
-        theMachine.finishTime = theTime;
-    }
 }
