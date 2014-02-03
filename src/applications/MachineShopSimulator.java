@@ -23,6 +23,27 @@ public class MachineShopSimulator {
     static Machine[] machine; // array of machines
     static int largeTime; // all machines finish before this
 
+    
+    
+    public static int nextEventMachine() {
+        // find first machine to finish, this is the
+        // machine with smallest finish time
+        int p = 1;
+        int t = machine[1].finishTime;
+        for (int i = 2; i < machine.length; i++){
+            if (machine[i].finishTime < t) {// i finishes earlier
+                p = i;
+                t = machine[i].finishTime;
+            }
+        }
+        return p;
+    }
+    
+    
+    
+    
+    
+    
     /** input machine shop data */
     static void inputData() {
         // define the input stream to be the standard input stream
@@ -84,7 +105,7 @@ public class MachineShopSimulator {
     /** process all jobs to completion */
     static void simulate() {
         while (numJobs > 0) {// at least one job left
-            int nextToFinish = eList.nextEventMachine();
+            int nextToFinish = nextEventMachine();
             timeNow = eList.nextEventTime(nextToFinish);
             // change job on machine nextToFinish
             Job theJob = getTheMachine(nextToFinish).changeState(nextToFinish);
@@ -148,13 +169,9 @@ public class MachineShopSimulator {
 	}
 
 	static Machine getTheMachine(int arrAddress){
-	    return getMachine()[arrAddress];
+	    return machine[arrAddress];
 	}
 	
-	
-	static Machine[] getMachine() {
-		return machine;
-	}
 
 	static void setMachine(Machine[] machine) {
 		MachineShopSimulator.machine = machine;

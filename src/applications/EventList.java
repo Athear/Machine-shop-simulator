@@ -20,19 +20,7 @@ public class EventList {
             finishTime[i] = theLargeTime;
     }
 
-    /** @return machine for next event */
-    public int nextEventMachine() {
-        // find first machine to finish, this is the
-        // machine with smallest finish time
-        int p = 1;
-        int t = finishTime[1];
-        for (int i = 2; i < finishTime.length; i++)
-            if (finishTime[i] < t) {// i finishes earlier
-                p = i;
-                t = finishTime[i];
-            }
-        return p;
-    }
+
 
     public int nextEventTime(int theMachine) {
         return finishTime[theMachine];
