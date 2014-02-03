@@ -30,7 +30,7 @@ public class Machine {
         
 	
 	//TODO get rid of address
-        public Job changeState(int address) {// Task on theMachine has
+        public Job changeState() {// Task on theMachine has
                                                     // finished,
             // schedule next one.
             Job lastJob;
