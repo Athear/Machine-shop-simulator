@@ -88,7 +88,7 @@ public class MachineShopSimulator {
                     throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
                 if (j == 1)
                     firstMachine = theMachine; // job's first machine
-                theJob.addTask(theMachine, theTaskTime); // add to
+                theJob.addTask(getTheMachine(theMachine), theTaskTime); // add to
             } // task queue
             getTheMachine(firstMachine).jobQ.put(theJob);
         }

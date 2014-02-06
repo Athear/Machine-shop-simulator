@@ -19,7 +19,7 @@ public class Job {
     }
 
     // other methods
-    public void addTask(int theMachine, int theTime) {
+    public void addTask(Machine theMachine, int theTime) {
         taskQ.put(new Task(theMachine, theTime));
     }
 
