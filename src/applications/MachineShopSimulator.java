@@ -39,10 +39,12 @@ public class MachineShopSimulator {
     }
     
     public static Machine nextFreeMachine(){
-    	Machine currentShortest = machine[1];
+    	Machine currentShortest = getTheMachine(1);
+    	Machine nextToCheck;
     	for (int i = 2; i < machine.length; i++){
-            if (machine[i].finishTime < currentShortest.finishTime){// i finishes earlier
-            	currentShortest = machine[i];
+    		nextToCheck = getTheMachine(i);
+            if (nextToCheck.finishTime < currentShortest.finishTime){// i finishes earlier
+            	currentShortest = nextToCheck;
             }
     	}
 		return currentShortest;
