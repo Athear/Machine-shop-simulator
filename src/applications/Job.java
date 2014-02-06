@@ -41,8 +41,8 @@ public class Job {
     boolean moveToNextMachine(int currentTime, int maxTime) {
         if (taskQ.isEmpty()) {// no next task
             System.out.println("Job " + id + " has completed at "
-                    + MachineShopSimulator.getTimeNow() + " Total wait was "
-                    + (MachineShopSimulator.getTimeNow() - length));
+                    + currentTime + " Total wait was "
+                    + (currentTime - length));
             return false;
         }// theJob has a next task
          // get machine for next task
@@ -50,11 +50,11 @@ public class Job {
         
         // put on machine p's wait queue
         nextMachine.jobQ.put(this);
-        arrivalTime = MachineShopSimulator.getTimeNow();
+        arrivalTime = currentTime;
         // if p idle, schedule immediately
         
         //TODO possibly move this to machineShopSimulator or clean it up somehow.
-        if (nextMachine.nextEventTime() == MachineShopSimulator.getLargeTime()) {// machine is idle
+        if (nextMachine.nextEventTime() == maxTime) {// machine is idle
             nextMachine.changeState(currentTime, maxTime);
         }
         return true;
