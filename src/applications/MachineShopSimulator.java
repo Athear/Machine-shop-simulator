@@ -16,11 +16,11 @@ public class MachineShopSimulator {
 
 
     // data members of MachineShopSimulator
-    private static int timeNow; // current time
+    private static int timeNow; // current time //TODO: rename runTime or shopRunTime?
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
     private static Machine[] machine; // array of machines
-    private static int largeTime; // all machines finish before this
+    private static int largeTime; // all machines finish before this //TODO: Rename maxTime or timeLimit? //TODO: constant or potential variable?
 
     
     
@@ -129,14 +129,7 @@ public class MachineShopSimulator {
 
     /** entry point for machine shop simulator */
     public static void main(String[] args) {
-        //TODO make this a constant
         largeTime = Integer.MAX_VALUE;
-        /*
-         * It's vital that we (re)set this to 0 because if the simulator is called
-         * multiple times (as happens in the acceptance tests), because timeNow
-         * is static it ends up carrying over from the last time it was run. I'm
-         * not convinced this is the best place for this to happen, though.
-         */
         inputData(); // get machine and job data
         startShop(); // initial machine loading
         simulate(); // run all jobs through shop
