@@ -16,11 +16,11 @@ public class MachineShopSimulator {
 
 
     // data members of MachineShopSimulator
-    static int timeNow; // current time
+    private static int timeNow; // current time
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
-    static Machine[] machine; // array of machines
-    static int largeTime; // all machines finish before this
+    private static Machine[] machine; // array of machines
+    private static int largeTime; // all machines finish before this
 
     
     
@@ -142,16 +142,6 @@ public class MachineShopSimulator {
         simulate(); // run all jobs through shop
         outputStatistics(); // output machine wait times
     }
-
-	static int getTimeNow() {
-		return timeNow;
-	}
-
-
-	static int getLargeTime() {
-		return largeTime;
-	}
-
 
 	static Machine getTheMachine(int arrAddress){
 	    return machine[arrAddress];
