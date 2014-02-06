@@ -55,7 +55,7 @@ public class Job {
         
         //TODO possibly move this to machineShopSimulator or clean it up somehow.
         if (nextMachine.nextEventTime() == MachineShopSimulator.getLargeTime()) {// machine is idle
-            nextMachine.changeState();
+            nextMachine.changeState(currentTime, maxTime);
         }
         return true;
         

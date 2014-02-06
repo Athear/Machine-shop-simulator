@@ -30,7 +30,7 @@ public class Machine {
     //    }
         
 	
-        public Job changeState() {// Task on theMachine has
+        public Job changeState(int currentTime, int maxTime) {// Task on theMachine has
                                                     // finished,
             // schedule next one.
             Job lastJob;

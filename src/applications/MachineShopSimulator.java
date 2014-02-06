@@ -97,7 +97,7 @@ public class MachineShopSimulator {
     /** load first jobs onto each machine */
     static void startShop() {
         for (int p = 1; p <= getNumMachines(); p++)
-            getTheMachine(p).changeState();
+            getTheMachine(p).changeState(timeNow, largeTime);
     }
 
     /** process all jobs to completion */
@@ -106,7 +106,7 @@ public class MachineShopSimulator {
             Machine nextToFinish = machine[nextEventMachine()];
             timeNow = nextToFinish.nextEventTime();
             // change job on machine nextToFinish
-            Job theJob = nextToFinish.changeState();
+            Job theJob = nextToFinish.changeState(timeNow, largeTime);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
             if (theJob != null && !theJob.moveToNextMachine(timeNow, largeTime))
