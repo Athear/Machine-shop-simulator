@@ -38,6 +38,16 @@ public class MachineShopSimulator {
         return p;
     }
     
+    public static Machine nextFreeMachine(){
+    	Machine currentShortest = machine[1];
+    	for (int i = 2; i < machine.length; i++){
+            if (machine[i].finishTime < currentShortest.finishTime){// i finishes earlier
+            	currentShortest = machine[i];
+            }
+    	}
+		return currentShortest;
+    }
+    
     
     
     
