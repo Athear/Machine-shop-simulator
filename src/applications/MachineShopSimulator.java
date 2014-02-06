@@ -96,6 +96,7 @@ public class MachineShopSimulator {
 
     /** load first jobs onto each machine */
     static void startShop() {
+    	timeNow = 0;
         for (int p = 1; p <= numMachines; p++)
             getTheMachine(p).changeState(timeNow, largeTime);
     }
@@ -136,7 +137,6 @@ public class MachineShopSimulator {
          * is static it ends up carrying over from the last time it was run. I'm
          * not convinced this is the best place for this to happen, though.
          */
-        timeNow = 0;
         inputData(); // get machine and job data
         startShop(); // initial machine loading
         simulate(); // run all jobs through shop
