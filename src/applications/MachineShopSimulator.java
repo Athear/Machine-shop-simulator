@@ -147,16 +147,9 @@ public class MachineShopSimulator {
 		return timeNow;
 	}
 
-	static void setTimeNow(int timeNow) {
-		MachineShopSimulator.timeNow = timeNow;
-	}
 
 	static int getLargeTime() {
 		return largeTime;
-	}
-
-	static void setLargeTime(int largeTime) {
-		MachineShopSimulator.largeTime = largeTime;
 	}
 
 
@@ -164,10 +157,6 @@ public class MachineShopSimulator {
 	    return machine[arrAddress];
 	}
 	
-
-	static void setMachine(Machine[] machine) {
-		MachineShopSimulator.machine = machine;
-	}
 
     static int getNumMachines() {
         return numMachines;
