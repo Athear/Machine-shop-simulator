@@ -12,10 +12,11 @@ public class Machine {
 	int finishTime;
 	int machineIndex;
 
-	public Machine(int index, int maxFinishTime) {
+	public Machine(int index, int maxFinishTime, int changeOverTime) {
 		jobQ = new LinkedQueue();
 		machineIndex=index;
 		finishTime = maxFinishTime;
+		changeTime = changeOverTime;
 	}
 
 	/**
