@@ -27,7 +27,7 @@ public class MachineShopSimulator {
     private static Machine nextFreeMachine(){
     	Machine currentShortest = getTheMachine(1);
     	Machine nextToCheck;
-    	for (int i = 2; i < machine.length; i++){
+    	for (int i = 2; i <= numMachines; i++){
     		nextToCheck = getTheMachine(i);
             if (nextToCheck.finishTime < currentShortest.finishTime){// i finishes earlier
             	currentShortest = nextToCheck;
@@ -121,8 +121,9 @@ public class MachineShopSimulator {
     static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
-            System.out.println("Machine " + p + " completed " + machine[p].numTasks + " tasks");
-            System.out.println("The total wait time was " + machine[p].totalWait + "\n");
+        	Machine theMachine = getTheMachine(p);
+            System.out.println("Machine " + p + " completed " + theMachine.numTasks + " tasks");
+            System.out.println("The total wait time was " + theMachine.totalWait + "\n");
         }
     }
 
