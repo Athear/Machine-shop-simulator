@@ -34,24 +34,24 @@ public class Machine {
 		// finished,
 		// schedule next one.
 		Job lastJob;
-		if (this.activeJob == null) {// in idle or change-over
+		if (activeJob == null) {// in idle or change-over
 			// state
 			lastJob = null;
 			// wait over, ready for new job
-			if (this.jobQ.isEmpty()){ // no waiting job
+			if (jobQ.isEmpty()){ // no waiting job
 				finishTime=maxTime;
 			}else {// take job off the queue and work on it
-				this.activeJob = (Job) this.jobQ.remove();
-				this.totalWait += currentTime - this.activeJob.arrivalTime;
-				this.numTasks++;
-				int t = this.activeJob.removeNextTask();
+				activeJob = (Job) jobQ.remove();
+				totalWait += currentTime - activeJob.arrivalTime;
+				numTasks++;
+				int t = activeJob.removeNextTask();
 				finishTime=currentTime + t;
 			}
 		} else {// task has just finished on machine[theMachine]
 			// schedule change-over time
-			lastJob = this.activeJob;
-			this.activeJob = null;
-			finishTime=currentTime + this.changeTime;
+			lastJob = activeJob;
+			activeJob = null;
+			finishTime=currentTime + changeTime;
 		}
 
 		return lastJob;
