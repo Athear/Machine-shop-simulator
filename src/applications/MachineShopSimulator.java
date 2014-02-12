@@ -68,7 +68,6 @@ public class MachineShopSimulator {
 
         // create event and machine queues
         machine = new Machine[numMachines + 1];
-
         // input the change-over times
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
@@ -84,7 +83,6 @@ public class MachineShopSimulator {
         for (int i = 1; i <= numJobs; i++) {
             System.out.println("Enter number of tasks for job " + i);
             int tasks = keyboard.readInteger(); // number of tasks
-            int firstMachine = 0; // machine for first task
             if (tasks < 1)
                 throw new MyInputException(EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK);
 
@@ -97,11 +95,12 @@ public class MachineShopSimulator {
                 int theTaskTime = keyboard.readInteger();
                 if (theMachine < 1 || theMachine > numMachines || theTaskTime < 1)
                     throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
-                if (j == 1)
-                    firstMachine = theMachine; // job's first machine
+                if (j == 1){
+                	getTheMachine(theMachine).jobQ.put(theJob); // set the first machine for the job
+                }
                 theJob.addTask(getTheMachine(theMachine), theTaskTime); // add to
             } // task queue
-            getTheMachine(firstMachine).jobQ.put(theJob);
+            
         }
     }
 
