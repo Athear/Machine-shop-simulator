@@ -23,21 +23,7 @@ public class MachineShopSimulator {
     private static int timeLimit; // all machines finish before this
 
     
-    
-    public static int nextEventMachine() {
-        // find first machine to finish, this is the
-        // machine with smallest finish time
-        int p = 1;
-        int t = machine[1].finishTime;
-        for (int i = 2; i < machine.length; i++){
-            if (machine[i].finishTime < t) {// i finishes earlier
-                p = i;
-                t = machine[i].finishTime;
-            }
-        }
-        return p;
-    }
-    
+     
     public static Machine nextFreeMachine(){
     	Machine currentShortest = getTheMachine(1);
     	Machine nextToCheck;
@@ -50,11 +36,7 @@ public class MachineShopSimulator {
 		return currentShortest;
     }
     
-    
-    
-    
-    
-    
+
     /** input machine shop data */
     static void inputData() {
         // define the input stream to be the standard input stream
@@ -122,7 +104,7 @@ public class MachineShopSimulator {
     /** process all jobs to completion */
     static void simulate() {
         while (numJobs > 0) {// at least one job left
-            Machine nextToFinish = machine[nextEventMachine()];
+            Machine nextToFinish = nextFreeMachine();
             timeNow = nextToFinish.nextEventTime();
             // change job on machine nextToFinish
             Job theJob = nextToFinish.changeState(timeNow, timeLimit);
