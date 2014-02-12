@@ -122,7 +122,7 @@ public class MachineShopSimulator {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
         	Machine theMachine = getTheMachine(p);
-            System.out.println("Machine " + p + " completed " + theMachine.numTasks + " tasks");
+            System.out.println("Machine " + theMachine.machineIndex + " completed " + theMachine.numTasks + " tasks");
             System.out.println("The total wait time was " + theMachine.totalWait + "\n");
         }
     }
