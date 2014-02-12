@@ -61,8 +61,9 @@ public class MachineShopSimulator {
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
             int changeTime = keyboard.readInteger();
-            if (changeTime < 0)
+            if (changeTime < 0){
                 throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
+            }
             machine[j] = new Machine(j,timeLimit, changeTime);
         }
 	}
@@ -80,14 +81,16 @@ public class MachineShopSimulator {
             System.out.println("Enter the tasks (machine, time)"
                     + " in process order");
             for (int j = 1; j <= tasks; j++) {// get tasks for job i
-                int theMachine = keyboard.readInteger();
+                int theMachineIndex = keyboard.readInteger();
                 int theTaskTime = keyboard.readInteger();
-                if (theMachine < 1 || theMachine > numMachines || theTaskTime < 1)
+                if (theMachineIndex < 1 || theMachineIndex > numMachines || theTaskTime < 1){
                     throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
-                if (j == 1){
-                	getTheMachine(theMachine).jobQ.put(theJob); // set the first machine for the job
                 }
-                theJob.addTask(getTheMachine(theMachine), theTaskTime); // add to
+                Machine theMachine = getTheMachine(theMachineIndex);
+                if (j == 1){
+                	theMachine.jobQ.put(theJob); // set the first machine for the job
+                }
+                theJob.addTask(theMachine, theTaskTime); // add to
             } // task queue
             
         }
@@ -109,8 +112,9 @@ public class MachineShopSimulator {
             Job theJob = nextToFinish.changeState(timeNow, timeLimit);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !theJob.moveToNextMachine(timeNow, timeLimit))
+            if (theJob != null && !theJob.moveToNextMachine(timeNow, timeLimit)){
                 numJobs--;
+            }
         }
     }
 
