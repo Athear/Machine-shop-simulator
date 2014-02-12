@@ -51,9 +51,7 @@ public class Job {
         // put on machine p's wait queue
         nextMachine.jobQ.put(this);
         arrivalTime = currentTime;
-        // if p idle, schedule immediately
         
-        //TODO possibly move this to machineShopSimulator or clean it up somehow.
         if (nextMachine.nextEventTime() == maxTime) {// machine is idle
             nextMachine.changeState(currentTime, maxTime);
         }

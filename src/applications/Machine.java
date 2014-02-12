@@ -34,8 +34,7 @@ public class Machine {
 		// finished,
 		// schedule next one.
 		Job lastJob;
-		if (activeJob == null) {// in idle or change-over
-			// state
+		if (activeJob == null) {// in idle or change-over state
 			lastJob = null;
 			// wait over, ready for new job
 			if (jobQ.isEmpty()){ // no waiting job
