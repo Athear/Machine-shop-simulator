@@ -78,8 +78,7 @@ public class MachineShopSimulator {
             }
             // create the job
             theJob = new Job(i);
-            System.out.println("Enter the tasks (machine, time)"
-                    + " in process order");
+            System.out.println("Enter the tasks (machine, time)" + " in process order");
             for (int j = 1; j <= tasks; j++) {// get tasks for job i
                 int theMachineIndex = keyboard.readInteger();
                 int theTaskTime = keyboard.readInteger();
@@ -122,10 +121,8 @@ public class MachineShopSimulator {
     static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
-            System.out.println("Machine " + p + " completed "
-                    + machine[p].numTasks + " tasks");
-            System.out.println("The total wait time was "
-                    + machine[p].totalWait);
+            System.out.println("Machine " + p + " completed " + machine[p].numTasks + " tasks");
+            System.out.println("The total wait time was " + machine[p].totalWait);
             System.out.println();
         }
     }
