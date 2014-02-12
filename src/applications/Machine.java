@@ -52,7 +52,7 @@ public class Machine {
 		return lastJob;
 	}
 
-	public int nextEventTime() {
+	public int timeUntilFinished() { //TODO: rename. timeUntilFinished()?
 		return finishTime;
 	}
 }

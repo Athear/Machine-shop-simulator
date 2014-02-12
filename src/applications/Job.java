@@ -39,7 +39,7 @@ public class Job {
      * @return false iff no next task
      */
     boolean moveToNextMachine(int currentTime, int maxTime) {
-        if (taskQ.isEmpty()) {// no next task
+        if (taskQ.isEmpty()) {// no next task //TODO: WTF split this. Make one a boolean and the other void.
             System.out.print("Job " + id + " has completed at " + currentTime);
             System.out.println(" Total wait was " + (currentTime - length));
             return false;
@@ -51,7 +51,7 @@ public class Job {
         nextMachine.jobQ.put(this);
         arrivalTime = currentTime;
         
-        if (nextMachine.nextEventTime() == maxTime) {// machine is idle
+        if (nextMachine.timeUntilFinished() == maxTime) {// machine is idle
             nextMachine.changeState(currentTime, maxTime);
         }
         return true;
