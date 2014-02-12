@@ -20,7 +20,7 @@ public class MachineShopSimulator {
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
     private static Machine[] machine; // array of machines
-    private static int largeTime; // all machines finish before this //TODO: Rename maxTime or timeLimit? //TODO: constant or potential variable?
+    private static int timeLimit; // all machines finish before this
 
     
     
@@ -66,26 +66,34 @@ public class MachineShopSimulator {
         if (numMachines < 1 || numJobs < 1)
             throw new MyInputException(NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1);
 
-        // create event and machine queues
-        machine = new Machine[numMachines + 1];
+        // create the machine queues
+        createMachines(keyboard);
+
+        // input the jobs
+         createJobs(keyboard);
+    }
+
+	private static void createMachines(MyInputStream keyboard) {
+		machine = new Machine[numMachines + 1];
         // input the change-over times
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
             int ct = keyboard.readInteger();
             if (ct < 0)
                 throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
-            machine[j] = new Machine(j,largeTime);
+            machine[j] = new Machine(j,timeLimit);
             machine[j].changeTime = ct;
         }
+	}
 
-        // input the jobs
-        Job theJob;
-        for (int i = 1; i <= numJobs; i++) {
+	private static void createJobs(MyInputStream keyboard) {
+		Job theJob;
+		for (int i = 1; i <= numJobs; i++) {
             System.out.println("Enter number of tasks for job " + i);
             int tasks = keyboard.readInteger(); // number of tasks
-            if (tasks < 1)
+            if (tasks < 1){
                 throw new MyInputException(EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK);
-
+            }
             // create the job
             theJob = new Job(i);
             System.out.println("Enter the tasks (machine, time)"
@@ -102,13 +110,13 @@ public class MachineShopSimulator {
             } // task queue
             
         }
-    }
+	}
 
     /** load first jobs onto each machine */
     static void startShop() {
     	timeNow = 0;
         for (int p = 1; p <= numMachines; p++)
-            getTheMachine(p).changeState(timeNow, largeTime);
+            getTheMachine(p).changeState(timeNow, timeLimit);
     }
 
     /** process all jobs to completion */
@@ -117,10 +125,10 @@ public class MachineShopSimulator {
             Machine nextToFinish = machine[nextEventMachine()];
             timeNow = nextToFinish.nextEventTime();
             // change job on machine nextToFinish
-            Job theJob = nextToFinish.changeState(timeNow, largeTime);
+            Job theJob = nextToFinish.changeState(timeNow, timeLimit);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !theJob.moveToNextMachine(timeNow, largeTime))
+            if (theJob != null && !theJob.moveToNextMachine(timeNow, timeLimit))
                 numJobs--;
         }
     }
@@ -139,7 +147,7 @@ public class MachineShopSimulator {
 
     /** entry point for machine shop simulator */
     public static void main(String[] args) {
-        largeTime = Integer.MAX_VALUE;
+        timeLimit = Integer.MAX_VALUE;
         inputData(); // get machine and job data
         startShop(); // initial machine loading
         simulate(); // run all jobs through shop
