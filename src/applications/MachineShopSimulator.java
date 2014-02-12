@@ -24,7 +24,7 @@ public class MachineShopSimulator {
 
     
      
-    public static Machine nextFreeMachine(){
+    private static Machine nextFreeMachine(){
     	Machine currentShortest = getTheMachine(1);
     	Machine nextToCheck;
     	for (int i = 2; i < machine.length; i++){
@@ -38,7 +38,7 @@ public class MachineShopSimulator {
     
 
     /** input machine shop data */
-    static void inputData() {
+    private static void inputData() {
         // define the input stream to be the standard input stream
         MyInputStream keyboard = new MyInputStream();
 
@@ -96,14 +96,14 @@ public class MachineShopSimulator {
 	}
 
     /** load first jobs onto each machine */
-    static void startShop() {
+    private static void startShop() {
     	timeNow = 0;
         for (int p = 1; p <= numMachines; p++)
             getTheMachine(p).changeState(timeNow, timeLimit);
     }
 
     /** process all jobs to completion */
-    static void simulate() {
+    private static void simulate() {
         while (numJobs > 0) {// at least one job left
             Machine nextToFinish = nextFreeMachine();
             timeNow = nextToFinish.nextEventTime();
@@ -122,8 +122,7 @@ public class MachineShopSimulator {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
             System.out.println("Machine " + p + " completed " + machine[p].numTasks + " tasks");
-            System.out.println("The total wait time was " + machine[p].totalWait);
-            System.out.println();
+            System.out.println("The total wait time was " + machine[p].totalWait + "\n");
         }
     }
 
@@ -136,7 +135,7 @@ public class MachineShopSimulator {
         outputStatistics(); // output machine wait times
     }
 
-	static Machine getTheMachine(int arrAddress){
+	private static Machine getTheMachine(int arrAddress){
 	    return machine[arrAddress];
 	}
 

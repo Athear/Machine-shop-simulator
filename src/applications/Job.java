@@ -40,7 +40,7 @@ public class Job {
      */
     boolean moveToNextMachine(int currentTime, int maxTime) {
         if (taskQ.isEmpty()) {// no next task
-            System.out.println("Job " + id + " has completed at " + currentTime);
+            System.out.print("Job " + id + " has completed at " + currentTime);
             System.out.println(" Total wait was " + (currentTime - length));
             return false;
         }// theJob has a next task

@@ -26,12 +26,7 @@ public class Machine {
 	 * 
 	 */
 
-	//    static Machine getMachineFromArr(int machineAddress){   
-	//        return machine[machineAddress];
-	//    }
-
-
-	public Job changeState(int currentTime, int maxTime) {// Task on theMachine has
+	Job changeState(int currentTime, int maxTime) {// Task on theMachine has
 		// finished,
 		// schedule next one.
 		Job lastJob;
