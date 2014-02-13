@@ -2,6 +2,8 @@
 
 package applications;
 
+import java.util.HashMap;
+
 import utilities.MyInputStream;
 import exceptions.MyInputException;
 import applications.Machine;
@@ -19,15 +21,13 @@ public class MachineShopSimulator {
     private static int timeNow; // current time //TODO: rename runTime or shopRunTime?
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
-    private static Machine[] machine; // array of machines
     private static int timeLimit; // all machines finish before this
-
-    
+    private static HashMap<Integer, Machine> machines;
      
     private static Machine nextFreeMachine(){
     	Machine currentShortest = getTheMachine(1);
     	Machine nextToCheck;
-    	for (int i = 2; i <= numMachines; i++){
+    	for (int i=1; i<=numMachines; i++){
     		nextToCheck = getTheMachine(i);
             if (nextToCheck.finishTime < currentShortest.finishTime){// i finishes earlier
             	currentShortest = nextToCheck;
@@ -56,7 +56,7 @@ public class MachineShopSimulator {
     }
 
 	private static void createMachines(MyInputStream keyboard) {
-		machine = new Machine[numMachines + 1];
+		machines = new HashMap<Integer, Machine>(numMachines);
         // input the change-over times
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
@@ -64,7 +64,8 @@ public class MachineShopSimulator {
             if (changeTime < 0){
                 throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
             }
-            machine[j] = new Machine(j,timeLimit, changeTime);
+            machines.put(j,new Machine(j,timeLimit, changeTime));
+            
         }
 	}
 
@@ -111,7 +112,7 @@ public class MachineShopSimulator {
             Job theJob = nextToFinish.changeState(timeNow, timeLimit);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !theJob.moveToNextMachine(timeNow, timeLimit)){ //TODO: see job
+            if (theJob != null && !theJob.moveToNextMachine(timeNow, timeLimit)){
                 numJobs--;
             }
         }
@@ -137,7 +138,7 @@ public class MachineShopSimulator {
     }
 
 	private static Machine getTheMachine(int arrAddress){
-	    return machine[arrAddress];
+	    return machines.get(arrAddress);
 	}
 
 }
