@@ -2,7 +2,7 @@
 
 package applications;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import utilities.MyInputStream;
 import exceptions.MyInputException;
@@ -22,15 +22,13 @@ public class MachineShopSimulator {
     private static int numMachines; // number of machines
     private static int numJobs; // number of jobs
     private static int timeLimit; // all machines finish before this
-    private static HashMap<Integer, Machine> machines;
+    private static TreeMap<Integer, Machine> machines;
      
     private static Machine nextFreeMachine(){
     	Machine currentShortest = getTheMachine(1);
-    	Machine nextToCheck;
-    	for (int i=1; i<=numMachines; i++){
-    		nextToCheck = getTheMachine(i);
-            if (nextToCheck.finishTime < currentShortest.finishTime){// i finishes earlier
-            	currentShortest = nextToCheck;
+    	for (Machine theMachine: machines.values()){
+            if (theMachine.finishTime < currentShortest.finishTime){// i finishes earlier
+            	currentShortest = theMachine;
             }
     	}
 		return currentShortest;
@@ -56,7 +54,7 @@ public class MachineShopSimulator {
     }
 
 	private static void createMachines(MyInputStream keyboard) {
-		machines = new HashMap<Integer, Machine>(numMachines);
+		machines = new TreeMap<Integer, Machine>();
         // input the change-over times
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
@@ -121,8 +119,7 @@ public class MachineShopSimulator {
     /** output wait times at machines */
     static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
-        for (int p = 1; p <= numMachines; p++) {
-        	Machine theMachine = getTheMachine(p);
+        for (Machine theMachine:machines.values()) {
             System.out.println("Machine " + theMachine.machineIndex + " completed " + theMachine.numTasks + " tasks");
             System.out.println("The total wait time was " + theMachine.totalWait + "\n");
         }
