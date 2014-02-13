@@ -5,20 +5,16 @@ import dataStructures.LinkedQueue;
 
 public class Job {
 
-    // data members
-    public LinkedQueue taskQ; // this job's tasks
-    public int length; // sum of scheduled task times
+    public LinkedQueue taskQ; 
+    public int totalJobTime; 
     public int arrivalTime; // arrival time at current queue
-    public int id; // job identifier
+    public int id;
 
-    // constructor
     public Job(int theId) {
         id = theId;
         taskQ = new LinkedQueue();
-        // length and arrivalTime have default value 0
     }
 
-    // other methods
     public void addTask(Machine theMachine, int theTime) {
         taskQ.put(new Task(theMachine, theTime));
     }
@@ -28,26 +24,25 @@ public class Job {
      */
     public int removeNextTask() {
         int theTime = ((Task) taskQ.remove()).time;
-        length += theTime;
+        totalJobTime += theTime;
         return theTime;
     }
 
-    // methods
     /**
      * move theJob to machine for its next task
      * 
      * @return false iff no next task
      */
     boolean moveToNextMachine(int currentTime, int maxTime) {
-        if (taskQ.isEmpty()) {// no next task //TODO: WTF split this. Make one a boolean and the other void.
+        if (taskQ.isEmpty()) { //TODO: WTF split this. Make one a boolean and the other void.
             System.out.print("Job " + id + " has completed at " + currentTime);
-            System.out.println(" Total wait was " + (currentTime - length));
+            System.out.println(" Total wait was " + (currentTime - totalJobTime));
             return false;
-        }// theJob has a next task
-         // get machine for next task
+        }
+        
         Machine nextMachine = ((Task) taskQ.getFrontElement()).machine;
         
-        // put on machine p's wait queue
+        //add "this" job to the nextMachines job queue
         nextMachine.jobQ.put(this);
         arrivalTime = currentTime;
         

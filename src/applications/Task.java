@@ -2,7 +2,6 @@ package applications;
 
 
 public class Task {
-	// data members
 	public Machine machine;
 	public int time;
 

@@ -20,30 +20,28 @@ public class Machine {
 	}
 
 	/**
-	 * change the state of theMachine
+	 * Change the state of theMachine:
+	 * Start change-over if a task has just finished, or
+	 * schedule the next waiting task once change-over is complete
 	 * 
 	 * @return last job run on this machine
-	 * 
 	 */
 
-	Job changeState(int currentTime, int maxTime) {// Task on theMachine has
-		// finished,
-		// schedule next one.
+	Job changeState(int currentTime, int maxTime) {
 		Job lastJob;
-		if (activeJob == null) {// in idle or change-over state
+		if (activeJob == null) {//change-over is complete
 			lastJob = null;
-			// wait over, ready for new job
-			if (jobQ.isEmpty()){ // no waiting job
+			if (jobQ.isEmpty()){
 				finishTime=maxTime;
-			}else {// take job off the queue and work on it
+			}else {
 				activeJob = (Job) jobQ.remove();
 				totalWait += currentTime - activeJob.arrivalTime;
 				numTasks++;
 				int t = activeJob.removeNextTask();
 				finishTime=currentTime + t;
 			}
-		} else {// task has just finished on machine[theMachine]
-			// schedule change-over time
+		} else {// a task has just finished on this machine 
+			
 			lastJob = activeJob;
 			activeJob = null;
 			finishTime=currentTime + changeTime;
@@ -52,7 +50,7 @@ public class Machine {
 		return lastJob;
 	}
 
-	public int timeUntilFinished() { //TODO: rename. timeUntilFinished()?
+	public int timeUntilFinished() {
 		return finishTime;
 	}
 }
