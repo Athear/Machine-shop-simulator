@@ -99,8 +99,8 @@ public class MachineShopSimulator {
     /** load first jobs onto each machine */
     private static void startShop() {
     	timeNow = 0;
-        for (int p = 1; p <= numMachines; p++)
-            getTheMachine(p).changeState(timeNow, timeLimit);
+        for (Machine theMachine: machines.values())
+            theMachine.changeState(timeNow, timeLimit);
     }
 
     /** process all jobs to completion */
@@ -137,8 +137,8 @@ public class MachineShopSimulator {
         outputStatistics(); // output machine wait times
     }
 
-	private static Machine getTheMachine(int arrAddress){
-	    return machines.get(arrAddress);
+	private static Machine getTheMachine(int machineId){
+	    return machines.get(machineId);
 	}
 
 }
